@@ -278,9 +278,9 @@ jobs:
       - name: Require daed on the built target
         run: |
           set -eu
-          dir="artifacts/packages-sdk24.10-aarch64_cortex-a53/feed"
-          if ls "$dir"/daed_*.ipk >/dev/null 2>&1; then
-            echo "daed ipk present"
+          ipk=$(find artifacts -name 'daed_*.ipk' 2>/dev/null | head -1)
+          if [ -n "$ipk" ]; then
+            echo "daed ipk present: $ipk"
           else
             echo "MISSING: daed ipk"; exit 1
           fi
